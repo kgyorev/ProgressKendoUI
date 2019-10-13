@@ -12,10 +12,7 @@
     <script src="../../js/jszip.min.js"></script>
     <script src="../../js/kendo.all.min.js"></script>
     <script src="../content/shared/js/console.js"></script>
-    <script>
-        
-    </script>
-    
+
     
 </head>
 <body>
@@ -27,18 +24,18 @@
             <script>
                 var wnd,
                     detailsTemplate;
-                function onChange(arg) {
-                    kendoConsole.log("The selected product ids are: [" + this.selectedKeyNames().join(", ") + "]");
-                }
-
                 $(document).ready(function () {
                         $("#grid").kendoGrid({
                             dataSource: {
-                                //pageSize: 10,
                                 data: products,
                                 schema: {
                                     model: {
-                                        id: "ProductID"
+                                        fields: {
+                                            ProductName: {type: "string"},
+                                            UnitsInStock: {type: "number"},
+                                            UnitPrice: {type: "number"},
+                                            Discontinued: {type: "boolean"}
+                                        }
                                     }
                                 }
                             },
@@ -46,9 +43,7 @@
                             scrollable: true,
                             persistSelection: true,
                             sortable: true,
-                            change: onChange,
                             columns: [
-                               // { selectable: true, width: "50px" },
                                 { field:"ProductName", title: "Product Name" },
                                 { field:"UnitsInStock", title: "Units In Stock" },
                                 { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "130px" },
@@ -89,10 +84,6 @@
                         </dl>
                     </div>
                 </script>
-           <!-- <div class="box wide">
-                <h4>Console log</h4>
-                <div class="console"></div>
-            </div>-->
             <style type="text/css">
                 .console div {
                     height: 3.3em;
